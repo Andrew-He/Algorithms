@@ -6,14 +6,14 @@
 using std::cout;
 using std::endl; 
 
-class stack{
+class stack1{
 private:
 	int _top;
 	int _stack[100];  
 	int _size; 
 
 public:
-	stack(){
+	stack1(){
 		_top = 0; 
 		_size = 0; 
 		clear(); 
@@ -47,6 +47,72 @@ public:
 			cout << _stack[i] << endl; 
 	}
 };
+
+using namespace std; 
+
+template <typename T>
+struct Node{
+	T val; 
+	struct Node *next; 
+	Node(T _val):val(_val), next(nullptr){} 
+};
+
+template <typename T>
+class stack{
+private:
+	Node<T> *top; 
+	int size; 
+public:
+	stack(){ top = nullptr; }
+	~stack() {
+		while (top != nullptr) {
+			Node<T> *node = top; 
+			top = top -> next; 
+			delete node; 
+		}
+	}
+	stack(std::vector<T> v); 
+	void traverse(){
+		while (top != nullptr) {
+			cout << top -> val; 
+			top = top -> next; 
+		}
+
+	}
+};
+
+template <typename T>
+stack<T>::stack(std::vector<T> v) {
+	for_each(v.begin(), v.end(), [](typename::vector<T>::iterator p) {
+			static Node<T> *prev = nullptr; 
+			top = new Node<T>(*p); 
+			prev = top; 
+			top -> next = prev; 
+		});
+}
+
+
+
+int main(){
+	vector<int> v(10, 0); 
+	for_each(v.begin(), v.end(), [](int &a){ static int n = 1; a = n; ++n;  }); 
+	stack s(v); 
+	s.traverse(); 
+	return 0; 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // linked list implementation 
 /*
