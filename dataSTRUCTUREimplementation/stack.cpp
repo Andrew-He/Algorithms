@@ -63,54 +63,61 @@ private:
 	Node<T> *top; 
 	int size; 
 public:
-	stack(){ top = nullptr; }
-	~stack() {
-		while (top != nullptr) {
-			Node<T> *node = top; 
+	stack(){ top = nullptr; size = 0; }
+	~stack(){
+		while (top != nullptr){
+			Node<T> *node = top;
 			top = top -> next; 
-			delete node; 
+			delete node;  
 		}
 	}
-	stack(std::vector<T> v); 
-	void traverse(){
-		while (top != nullptr) {
-			cout << top -> val; 
-			top = top -> next; 
-		}
-
-	}
-};
+	void traverse(); 
+	void push(T val); 
+	void pop();  
+}; 
 
 template <typename T>
-stack<T>::stack(std::vector<T> v) {
-	for_each(v.begin(), v.end(), [](typename::vector<T>::iterator p) {
-			static Node<T> *prev = nullptr; 
-			top = new Node<T>(*p); 
-			prev = top; 
-			top -> next = prev; 
-		});
+void stack<T>::pop(){
+	if (top != nullptr){
+		Node<T> *node = top; 
+		top = top -> next; 
+		delete node; 
+		--size; 
+	} 
 }
 
+template <typename T>
+void stack<T>::push(T val){
+	if (top != nullptr) {
+		Node<T>* node = new Node<T>(val); 
+		node -> next = top; 
+		top = node; 
+	} else {
+		top = new Node<T>(val); 
+	}
+	++size; 
+}
 
+template <typename T>
+void stack<T>::traverse(){
+	while (top != nullptr) {
+		cout << top -> val; 
+		top = top -> next; 
+	}
+}
 
 int main(){
 	vector<int> v(10, 0); 
-	for_each(v.begin(), v.end(), [](int &a){ static int n = 1; a = n; ++n;  }); 
-	stack s(v); 
+	//for_each(v.begin(), v.end(), [](int &a){ static int n = 1; a = n; ++n;  }); 
+	//stack s(v); 
+	stack<int> s; 
+	s.push(10);
+	s.push(15);
+	s.push(20); 
+	s.pop(); 
 	s.traverse(); 
 	return 0; 
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
