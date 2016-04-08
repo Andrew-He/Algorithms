@@ -17,6 +17,7 @@ public:
 		int bitNum = (pos % 32); 
 		_bitset[wordNum] |= 1 << bitNum; 
 	}
+
 	void CheckDuplicates(vector<int> array) {
 		BitSet *bs = new BitSet(32000); 
 		for (int i = 0 ;  i < array.size(); ++i ) {
@@ -32,8 +33,9 @@ public:
 }; 
 
 
-/*
 
+
+/*
 // with array range in [1, 32000]
 int main() {
 	vector<int> arr = {1,2,2,3,31000}; 

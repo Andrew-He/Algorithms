@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 
+
 using std::cout;
 using std::endl; 
 
@@ -71,10 +72,18 @@ public:
 			delete node;  
 		}
 	}
+	stack(vector<int> v); 
 	void traverse(); 
 	void push(T val); 
 	void pop();  
 }; 
+
+template <typename T>
+stack<T>::stack(vector<int> v){
+	for(int n : v){
+		this -> push(n); 
+	}
+}
 
 template <typename T>
 void stack<T>::pop(){
@@ -101,20 +110,16 @@ void stack<T>::push(T val){
 template <typename T>
 void stack<T>::traverse(){
 	while (top != nullptr) {
-		cout << top -> val; 
+		cout << top -> val << endl; 
 		top = top -> next; 
 	}
 }
 
 int main(){
 	vector<int> v(10, 0); 
-	//for_each(v.begin(), v.end(), [](int &a){ static int n = 1; a = n; ++n;  }); 
+	for_each(v.begin(), v.end(), [](int &a){ static int n = 1; a = n; ++n;  }); 
 	//stack s(v); 
-	stack<int> s; 
-	s.push(10);
-	s.push(15);
-	s.push(20); 
-	s.pop(); 
+	stack<int> s(v);
 	s.traverse(); 
 	return 0; 
 }
