@@ -2,15 +2,6 @@
 #include "vector.hpp"
 #include <ostream>
 
-template <typename T>
-void vector<T>::push_back(){
-
+int main(){
+	
 }
-
-template <typename T>
-ostream& operator << (ostream &os){
-
-}
-
-
-

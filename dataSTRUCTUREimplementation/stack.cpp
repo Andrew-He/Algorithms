@@ -119,9 +119,13 @@ int main(){
 	vector<int> v(10, 0); 
 	for_each(v.begin(), v.end(), [](int &a){ static int n = 1; a = n; ++n;  }); 
 	//stack s(v); 
-	stack<int> s(v);
-	s.traverse(); 
+ 	stack<int> s[2] = {
+ 		stack<int>(v), stack<int>(v)
+ 	};
+ 	s[0].traverse(); 
+ 	s[1].traverse(); 
 	return 0; 
+ 	
 }
 
 

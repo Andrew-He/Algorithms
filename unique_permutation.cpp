@@ -2,6 +2,7 @@
 #include <random>
 #include <algorithm>
 #include <functional>
+#include <vector>
 
 using namespace std; 
 
@@ -15,11 +16,11 @@ int getRandomInteger(){
 void generate_random_seq( vector<int> &arr ){
 
 	iota(arr.begin(), arr.end(), getRandomInteger()); 
-	shuffle(arr.begin(), arr.end(), std::mt19937( random_device{}() )); 
+	//shuffle(arr.begin(), arr.end(), std::mt19937( random_device{}() ) ); 
 
 }
 template <typename f>
-void printAll(vector<int> arr, f&& func) {
+void printAll(vector<int> arr, f& func) {
 	for_each( arr.begin(), arr.end(), func); 
 }
 
@@ -37,13 +38,39 @@ int binarySearch(vector<int> v, int key, int start, int end){
 	return -1; 
 }
 
-class node{
-public:
-	int data; 
-	node* next; 
-};
+//use backtracking to generating power sets 
+void sub(std::vector<vector<int> > &rs, vector<int> &ls, string str, int pos); 
+void getPower(string str){
+	vector<vector<int> > rs; 
+	vector<int> list;
+	sub(rs, list, str, 0); 
 
- 
+	for(int i = 0; i < rs.size(); i++ ) {
+		for( int j = 0; j < rs[i].size(); j++)
+			cout << rs[i][j] - '0' << " "; 
+	cout << endl; 
+	}
+}
+
+void sub(std::vector<vector<int> > &rs, vector<int> &ls, string str, int pos){
+	rs.push_back(ls); 
+	for(int i = pos; i != str.length(); i++) {
+		if (i == str.size() || str[i] == str[i+1]) // remove duplicate 
+			continue; 
+		ls.push_back( str[i]); 
+		sub(rs, ls, str, pos + 1); 
+		ls.pop_back(); 
+	}
+	 
+}
+
+int main(){
+
+	getPower("123"); 
+
+
+}
+
 
 
 /*

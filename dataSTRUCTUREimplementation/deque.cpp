@@ -21,7 +21,7 @@ protected:
 	Node *tail; 
 public:
 	LinkedList() { cout << "LinkedList is called\n"; head = nullptr; tail = nullptr; }
-	~LinkedList(){ 
+	virtual ~LinkedList(){ 
 		int nodes_removed = 0; 
 		while (head != nullptr){
 			Node *cur = head; 
