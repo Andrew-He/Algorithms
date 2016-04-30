@@ -73,7 +73,7 @@ class deque : public LinkedList{
 			return len; 
 		}
 
-		void push_front(int val){
+		void push_front(int val) override {
 			if (head != nullptr){
 				head -> prev = new Node(val); 
 				head -> prev -> next = head; 
@@ -82,14 +82,14 @@ class deque : public LinkedList{
 				tail = head = new Node(val); 
 			}
 		}
-		void push_back(int val) {
+		void push_back(int val) override {
 			if (tail != nullptr){
 				tail -> next = new Node(val); 
 				tail -> next -> prev = tail; 
 				tail = tail -> next; 
 			}
 		}
-		void pop_back(){
+		void pop_back() override {
 			if (tail != nullptr) 
 			{	
 				if (tail -> prev != nullptr) {
@@ -102,7 +102,7 @@ class deque : public LinkedList{
 			}
 			cout << "\n nothing to pop back\n"; 
 		}
-		void pop_front() {
+		void pop_front() override {
 			if (head != nullptr){
 				if (head -> next != nullptr){
 					head = head -> next;  

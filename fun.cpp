@@ -175,11 +175,89 @@ void oddNumber(vector<T> v){
 	return; 
 }
  
-int main(){
-	
-
+template <typename Iterator>
+void reverse(Iterator &begin, Iterator &end){
+	if (begin == end) return; 
+	typename::iterator_traits<Iterator>::value_type temp = *begin; 
+	*begin = *end; 
+	*end = temp; 
+	reverse( begin + 1, end - 1); 
 }
 
+
+
+struct Node {
+	int data; 
+	Node *next; 
+	Node(int _data): data(_data) {}
+};
+
+class LinkedList{
+	int size; 
+	Node *head; 
+public:
+	LinkedList():size(0), head(nullptr){}
+	~LinkedList(){ 
+		while (head -> next != nullptr) {
+			Node *node = head; 
+			head = head -> next; 
+			delete node; 
+		}
+	}
+	void push(int elem){
+		Node* node = head; 
+		if (node == nullptr) { node = new Node(elem);  return; }
+		while (node -> next != nullptr) {
+			node = node -> next; 
+		}
+		node -> next = new Node(elem); 
+	}
+	void traverse(){
+		Node* node = head; 
+		while (node != nullptr) {
+			cout << node -> data << "\t"; 
+			node = node -> next; 
+		}
+	}
+};
+
+
+int max(int n){
+	if (n == 2)
+			return 1; 
+	else if (n == 3)
+			return 2; 
+	else if (n % 3 == 0)
+			return (int)pow(3, n/3); 
+	else if (n % 3 == 1) 
+			return 2 * 2 * (int)pow(3, (n - 4)/ 3); 
+	else 
+			return 2 * (int)pow(3, (n - 2) /3); 
+}
+
+
+
+
+int main(){
+
+	char *chs = new char(10); 
+	char chs1[10]; 
+	chs[0] = 'a'; 
+	chs[1] = 'b'; 
+	chs[2] = 'c'; 
+	chs[3] = 'd'; 
+	cout << strlen(chs); 
+	
+	cout << &chs << endl; 
+	cout << &chs1 << endl; 
+	delete chs; 
+}
+
+
+
+ 
+
+ 
 
 
 
