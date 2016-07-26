@@ -1,24 +1,31 @@
-#include <iostream>
 
-
-typedef unsigned int size_t; 
-
-
-class string{
+template <typename T> class String 
+{
 public:
-	string(const char *str = nullptr); 
-	string(const string *str); 
-	~string(); 
-
-	string operator+(const string &str) const;  // do not modify member
-
-	friend ostream & operator << (ostream &os){
-		
-	}
-
-
+	String(); 
+	explicit String(const T *); 
+	String(const String &);
+	String operator = (const String &); 
+	T* operator[](int n) {  return ptr[n];  } 
+	String &operator+=(T c); 
 
 private:
-	char *data; 
-	size_t length; 
+	static const int short_max = 15; 
+	int sz; 
+	T* ptr; 
 };
+
+
+template <typename T>
+String<T>::String() 
+	: sz(0)
+	, ptr{ch}
+{
+	ch[0] = {}; 
+}
+
+template <typename T>
+String& String<T>::operator+=(T c)
+{
+	return *this; 
+}

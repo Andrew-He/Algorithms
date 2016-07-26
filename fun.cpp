@@ -7,8 +7,10 @@
 #include <sys/mman.h>
 #include <unordered_map>
 #include <string> 
+#include <iterator>
 #include <thread>
 #include <queue>
+#include <algorithm>
 #include <unordered_set>
 
 using namespace std; 
@@ -236,24 +238,91 @@ int max(int n){
 }
 
 
+struct Purchase 
+{
+	string itemId; 
+	int quantity; 
+	Purchase(string item, int quan)
+		: itemId(item), quantity(quan) 
+	{}
+};
 
-
-int main(){
-
-	char *chs = new char(10); 
-	char chs1[10]; 
-	chs[0] = 'a'; 
-	chs[1] = 'b'; 
-	chs[2] = 'c'; 
-	chs[3] = 'd'; 
-	cout << strlen(chs); 
-	
-	cout << &chs << endl; 
-	cout << &chs1 << endl; 
-	delete chs; 
+vector<string> find(vector<Purchase> list, int threshold)
+{
+	vector<string> res; 
+	for( const Purchase pc : list )
+		if ( pc.quantity > threshold ) res.push_back( pc.itemId ); 
+	return res; 
 }
 
 
+ostream & operator << (ostream &os, vector<Purchase> pc)
+{
+	for( Purchase s : pc) 
+		os << s.itemId << " "; 
+	os << endl; 
+	return os; 
+}
+
+ostream & operator << (ostream &os, vector<string> res)
+{
+	for( string s : res) 
+		os << s << " "; 
+	os << endl; 
+	return os; 
+}
+
+
+
+class Pool    // global unique 
+{
+private:
+	static Pool *instance; 
+	Pool(){ value = 1; }  // user cannot instantiate a class by himself
+	int value; 
+
+public:
+	static Pool *getInstance()
+	{
+		if (instance == nullptr) 
+			instance = new Pool; 
+		return instance; 
+	} 
+	void print()
+	{
+		cout << "value :" << value << endl; 
+	}
+
+	void setValue( int n)
+	{
+		value = n; 
+	}
+
+	Pool(Pool &rhs) = delete; 
+	Pool& operator = (Pool const &rhs) = delete; 
+};
+
+
+Pool *Pool::instance = 0;    // avoid using this pattern most of cases
+ 
+
+int majorityElement(vector<int> num) {
+        int result=num[0];int len = num.size();
+        int count = 0;
+        for (int i=0;i<len;i++){
+            if (count==0||result==num[i]) {
+                result = num[i];count++;}   //count清零时，取当前数作为result
+            else count--;
+        }
+        return result;
+    }
+
+
+int main()
+{
+
+
+}
 
  
 

@@ -18,7 +18,7 @@ void groupAnagrams(const vector<string> in)
 	}
 	for(unordered_map<string, vector<int>>::iterator it = map.begin(); it != map.end(); it++ )
 	{
-		for( int i = 0; i < (it -> second).size(); i++ )
+		for( int i = 0; i < (it -> second).size(); ai++ )
 		{
 			cout << in[ (it->second)[i] ] << " ,"; 
 		}
